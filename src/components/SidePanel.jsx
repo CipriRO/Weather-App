@@ -4,10 +4,10 @@ export default function SidePanel({
   weatherData,
   time,
   notLoadedCurrWeather,
-  notLoadedCurrAstronomy,
   date,
   currentAstronomy,
   tempC,
+  precipMm,
   speedKph,
 }) {
   return (
@@ -46,7 +46,7 @@ export default function SidePanel({
             </div>
 
             <div className="flex flex-col">
-              { weatherData.current.feelslike_c >= weatherData.current.temp_c + 1 || weatherData.current.feelslike_c <= weatherData.current.temp_c - 1 && (
+              { (weatherData.current.feelslike_c >= weatherData.current.temp_c + 1 || weatherData.current.feelslike_c <= weatherData.current.temp_c - 1) && (
                 <p>Feels like {weatherData.current.feelslike_c}°C</p>
               )}
               <p className="font-semibold">
@@ -64,6 +64,7 @@ export default function SidePanel({
           weatherData={weatherData}
           speedKph={speedKph}
           tempC={tempC}
+          precipMm={precipMm}
           currentAstronomy={currentAstronomy}
         />
       </div>

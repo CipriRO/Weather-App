@@ -8,7 +8,6 @@ export default function SidePanelWind({
   speedKph,
   windDir,
 }) {
-
   function getWindDirectionFullName(direction) {
     let fullName;
 
@@ -70,29 +69,30 @@ export default function SidePanelWind({
   }
 
   return (
-    <div className="bg-[#A6ADBA1A] flex gap-6 items-center p-4 rounded-2xl">
-      <img src={windIcon} alt="wind icon" className="w-16" />
+    <div className="bg-[#A6ADBA1A] flex flex-col gap-4 items-center p-4 rounded-2xl">
+      <div className="flex gap-3 self-start">
+        <img src={windIcon} alt="wind icon" className="w-8" />
+        <h1 className="font-bold text-xl">Wind</h1>
+      </div>
 
-      <div className="flex flex-col">
-        <div className="flex flex-col text-left gap-1">
-          <h1 className="font-bold text-xl">Wind</h1>
-          <div className="flex">
-            <h2 className="font-medium text-lg">
-              {speedKph ? windKph + " km/h" : windMph + " mph"} wind
-            </h2>
-            <div className="divider divider-horizontal my-0" />
-            <h2 className="font-medium text-lg">
-              {speedKph ? gustKph + " km/h" : gustMph + " mph"} gust
-            </h2>
-          </div>
-        </div>
-
-        <div>
-          <div className="divider my-0" />
-          <h2>
-            Stay in touch with the wind&apos;s path from <span className="font-semibold">{getWindDirectionFullName(windDir)}</span>
+      <div className="flex flex-col items-center">
+        <div className="flex">
+          <h2 className="font-medium text-lg">
+            {speedKph ? windKph + " km/h" : windMph + " mph"} wind
+          </h2>
+          <div className="divider divider-horizontal my-0" />
+          <h2 className="font-medium text-lg">
+            {speedKph ? gustKph + " km/h" : gustMph + " mph"} gust
           </h2>
         </div>
+
+        <div className="divider my-0" />
+        <h2>
+          Stay in touch with the wind&apos;s path from{" "}
+          <span className="font-semibold">
+            {getWindDirectionFullName(windDir)}
+          </span>
+        </h2>
       </div>
     </div>
   );

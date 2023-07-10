@@ -5,6 +5,7 @@ import SidePanel from "./components/sidePanel";
 function App() {
   const [tempC, setTempC] = useState(true);
   const [speedKph, setSpeedKph] = useState(true);
+  const [precipMm, setPrecipMm] = useState(true);
   const [currentWeather, setcurrentWeather] = useState({
     location: {
       name: "Bucharest",
@@ -132,6 +133,7 @@ function App() {
         tempC={tempC}
         speedKph={speedKph}
         date={date}
+        precipMm={precipMm}
       />
     </>
   );
