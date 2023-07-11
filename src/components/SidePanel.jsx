@@ -4,8 +4,6 @@ export default function SidePanel({
   weatherData,
   time,
   notLoadedCurrWeather,
-  date,
-  currentAstronomy,
   tempC,
   precipMm,
   speedKph,
@@ -25,6 +23,8 @@ export default function SidePanel({
               </p>
             </h1>
 
+            {notLoadedCurrWeather && <span className="loading loading-ring loading-lg" />}
+
             <h3 className="font-medium text-2xl">
               {!notLoadedCurrWeather ? time : "--"}
             </h3>
@@ -41,13 +41,13 @@ export default function SidePanel({
               )}
 
               <h3 className="font-semibold text-6xl">
-                {!notLoadedCurrWeather ? weatherData.current.temp_c : "--"}°C
+                {!notLoadedCurrWeather ? (tempC ? weatherData.current.temp_c + '°C' : weatherData.current.temp_f + '°F') : (tempC ? "--°C" : "--°F")}
               </h3>
             </div>
 
             <div className="flex flex-col">
-              { (weatherData.current.feelslike_c >= weatherData.current.temp_c + 1 || weatherData.current.feelslike_c <= weatherData.current.temp_c - 1) && (
-                <p>Feels like {weatherData.current.feelslike_c}°C</p>
+              { !notLoadedCurrWeather && (weatherData.current.feelslike_c !== weatherData.current.temp_c) && (
+                <p>Feels like {tempC && !notLoadedCurrWeather ? weatherData.current.feelslike_c + '°C' : !tempC && !notLoadedCurrWeather ? weatherData.current.feelslike_f + '°F' : tempC && notLoadedCurrWeather ? '--°C' : !tempC && notLoadedCurrWeather && '--°F'}</p>
               )}
               <p className="font-semibold">
                 {!notLoadedCurrWeather && weatherData.current.condition.text}
@@ -59,13 +59,11 @@ export default function SidePanel({
         <div className="divider" />
 
         <SidePanelDetails
-          time={time}
-          date={date}
           weatherData={weatherData}
           speedKph={speedKph}
           tempC={tempC}
           precipMm={precipMm}
-          currentAstronomy={currentAstronomy}
+          notLoadedCurrWeather={notLoadedCurrWeather}
         />
       </div>
     </>

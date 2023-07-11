@@ -7,6 +7,7 @@ export default function SidePanelWind({
   gustMph,
   speedKph,
   windDir,
+  notLoadedCurrWeather
 }) {
   function getWindDirectionFullName(direction) {
     let fullName;
@@ -78,11 +79,11 @@ export default function SidePanelWind({
       <div className="flex flex-col items-center">
         <div className="flex">
           <h2 className="font-medium text-lg">
-            {speedKph ? windKph + " km/h" : windMph + " mph"} wind
+            {!notLoadedCurrWeather && speedKph ? windKph + " km/h" : !notLoadedCurrWeather && !speedKph ? windMph + " mph" : speedKph && notLoadedCurrWeather ? '-- km/h' : !speedKph &&  notLoadedCurrWeather && '-- mph'} wind
           </h2>
-          <div className="divider divider-horizontal my-0" />
+          <div className="divider divider-horizontal my-0 mx-2" />
           <h2 className="font-medium text-lg">
-            {speedKph ? gustKph + " km/h" : gustMph + " mph"} gust
+          {!notLoadedCurrWeather && speedKph ? gustKph + " km/h" : !notLoadedCurrWeather && !speedKph ? gustMph + " mph" : speedKph && notLoadedCurrWeather ? '-- km/h' : !speedKph &&  notLoadedCurrWeather && '-- mph'} gust
           </h2>
         </div>
 
@@ -90,7 +91,7 @@ export default function SidePanelWind({
         <h2>
           Stay in touch with the wind&apos;s path from{" "}
           <span className="font-semibold">
-            {getWindDirectionFullName(windDir)}
+            {!notLoadedCurrWeather ? getWindDirectionFullName(windDir) : '---'}
           </span>
         </h2>
       </div>

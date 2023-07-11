@@ -1,6 +1,6 @@
 import sunriseIcon from "../assets/images/icons/WeatherIcon - sunrise.svg";
 import sunsetIcon from "../assets/images/icons/WeatherIcon - sunset.svg";
-import sun from "../assets/images/icons/WeatherIcon - sun.svg";
+import sunriseSunset from "../assets/images/icons/WeatherIcon - sunrise&sunset.svg";
 import { isFuture } from "date-fns";
 
 export default function SidePanelSunRiseSunSet({ currentAstronomy, date }) {
@@ -12,7 +12,7 @@ export default function SidePanelSunRiseSunSet({ currentAstronomy, date }) {
   return (
     <div className="bg-[#A6ADBA1A] flex flex-col w-full gap-4 items-center p-4 rounded-2xl">
       <div className="flex self-start gap-3">
-        <img src={sun} alt="sun icon" className="w-8" />
+        <img src={sunriseSunset} alt="sun icon" className="w-8" />
         <h1 className="font-bold text-xl">Sunrise & Sunset</h1>
       </div>
       
