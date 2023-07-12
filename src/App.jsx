@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import SidePanel from "./components/sidePanel";
+import SidePanel from "./SidePanel";
 import CenterPanel from "./CenterPanel";
 
 function App() {
@@ -75,15 +75,6 @@ function App() {
   const [notLoadedCurrWeather, setNotLoadedCurrWeather] = useState(true);
   const [notLoadedCurrAstronomy, setNotLoadedCurrAstronomy] = useState(true);
 
-  let date = "";
-  let time = "";
-
-  if (!notLoadedCurrWeather) {
-    const dateAndTime = currentWeather.location.localtime;
-    date = dateAndTime.split(" ")[0];
-    time = dateAndTime.split(" ")[1];
-  }
-
   useEffect(() => {
     const apiKey = "c3cb9ca198f043e298794658230907";
     const location = "Romania";
@@ -130,24 +121,27 @@ function App() {
 
     // fetchcurrentWeather();
     // fetchcurrentAstronomy();
+
+    setTimeout(() => {
+      //remove these lines after the project is done
+      setNotLoadedCurrWeather(false);
+    }, 1500);
   }, []);
 
   !notLoadedCurrWeather && console.log("weather: ", currentWeather);
   !notLoadedCurrAstronomy && console.log("astronomy: ", currentAstronomy);
 
-  setTimeout(() => {
-    //remove these lines after the project is done
-    setNotLoadedCurrWeather(false);
-  }, 1500);
-
   return (
     <>
       <div className="w-full h-full flex justify-between">
-        <CenterPanel />
+        <CenterPanel
+          date={currentWeather.location.localtime}
+          notLoadedCurrWeather={notLoadedCurrWeather}
+        />
 
         <SidePanel
           weatherData={currentWeather}
-          time={time}
+          time={currentWeather.location.localtime.split(' ')[1]}
           notLoadedCurrWeather={notLoadedCurrWeather}
           tempC={tempC}
           speedKph={speedKph}

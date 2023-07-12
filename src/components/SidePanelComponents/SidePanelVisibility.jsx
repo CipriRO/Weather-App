@@ -1,11 +1,11 @@
-import eye from "../assets/images/icons/eye.svg";
+import eye from "../../assets/images/icons/eye.svg";
 
 export default function SidePanelVisibility({ visibKm, visibMl, speedKph, notLoadedCurrWeather }) {
   return (
-    <div className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
+    <section className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
       <div className="flex gap-3 items-center self-start">
         <img src={eye} alt="precipitations icon" className="w-6" />
-        <h1 className="font-bold">Visibility</h1>
+        <h1 className="font-bold text-ellipsis overflow-hidden">Visibility</h1>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -28,6 +28,6 @@ export default function SidePanelVisibility({ visibKm, visibMl, speedKph, notLoa
         : visibMl < 0.6 && <p>Poor visibility</p>)) : '---'}
         
       </div>
-    </div>
+    </section>
   );
 }

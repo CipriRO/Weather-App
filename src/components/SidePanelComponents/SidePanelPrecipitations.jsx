@@ -1,4 +1,4 @@
-import precipIcon from "../assets/images/icons/WeatherIcon - precipitation.svg";
+import precipIcon from "../../assets/images/icons/WeatherIcon - precipitation.svg";
 
 export default function SidePanelPrecipitations({
   precipMm,
@@ -7,10 +7,10 @@ export default function SidePanelPrecipitations({
   notLoadedCurrWeather,
 }) {
   return (
-    <div className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
+    <section className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
       <div className="flex gap-3 items-center self-start">
         <img src={precipIcon} alt="precipitations icon" className="w-4" />
-        <h1 className="font-bold">Precipitation</h1>
+        <h1 className="font-bold text-ellipsis overflow-hidden">Precipitation</h1>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -24,6 +24,6 @@ export default function SidePanelPrecipitations({
         </h3>
         <p>{!notLoadedCurrWeather ? 'till now' : '---'}</p>
       </div>
-    </div>
+    </section>
   );
 }

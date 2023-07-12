@@ -1,5 +1,8 @@
 // import SidePanelSunRiseSunSet from "./SidePanelSunRiseSunSet";
-import SidePanelGroup from "./SidePanelGroup";
+import SidePanelHumidity from "./SidePanelHumidity";
+import SidePanelPrecipitations from "./SidePanelPrecipitations";
+import SidePanelUv from "./SidePanelUv";
+import SidePanelVisibility from "./SidePanelVisibility";
 import SidePanelWind from "./SidePanelWind";
 import { motion } from "framer-motion";
 
@@ -9,10 +12,16 @@ export default function SidePanelDetails({
   tempC,
   precipMm,
   notLoadedCurrWeather,
-  scaleVariants
+  scaleVariants,
 }) {
   return (
-    <motion.div layout variants={scaleVariants} initial='hidden' animate='visible' className="flex flex-col items-center gap-3 w-full overflow-auto">
+    <motion.section
+      layout
+      variants={scaleVariants}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] grid-rows-[auto] grid-flow-dense gap-3 w-full overflow-auto"
+    >
       <SidePanelWind
         notLoadedCurrWeather={notLoadedCurrWeather}
         windKph={!notLoadedCurrWeather && weatherData.current.wind_kph}
@@ -23,22 +32,33 @@ export default function SidePanelDetails({
         speedKph={speedKph}
         tempC={tempC}
       />
-      <SidePanelGroup
+
+      <SidePanelHumidity
+        humidity={weatherData.current.humidity}
         notLoadedCurrWeather={notLoadedCurrWeather}
+      />
+      <SidePanelPrecipitations
         precipMm={precipMm}
-        precipmm={!notLoadedCurrWeather && weatherData.current.precip_mm}
         precipin={!notLoadedCurrWeather && weatherData.current.precip_in}
-        humidity={!notLoadedCurrWeather && weatherData.current.humidity}
-        uv={!notLoadedCurrWeather && weatherData.current.uv}
+        precipmm={!notLoadedCurrWeather && weatherData.current.precip_mm}
+        notLoadedCurrWeather={notLoadedCurrWeather}
+      />
+      <SidePanelUv
+        uv={weatherData.current.uv}
+        notLoadedCurrWeather={notLoadedCurrWeather}
+      />
+      <SidePanelVisibility
         speedKph={speedKph}
         visibKm={!notLoadedCurrWeather && weatherData.current.vis_km}
         visibMl={!notLoadedCurrWeather && weatherData.current.vis_miles}
+        notLoadedCurrWeather={notLoadedCurrWeather}
       />
+
       {/* <SidePanelSunRiseSunSet
         time={time}
         date={date}
         currentAstronomy={currentAstronomy}
       /> */}
-    </motion.div>
+    </motion.section>
   );
 }

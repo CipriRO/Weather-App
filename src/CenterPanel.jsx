@@ -1,8 +1,10 @@
+import Navbar from "./components/CenterPanelComponents/Navbar";
 
 export default function CenterPanel() {
   return (
-    <div className="p-3">
-
-    </div>
+    <article className="flex-1 p-3 relative">
+      <Navbar />
+      
+    </article>
   )
 }

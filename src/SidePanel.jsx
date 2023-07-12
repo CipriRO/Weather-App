@@ -1,4 +1,4 @@
-import SidePanelDetails from "./SidePanelDetails";
+import SidePanelDetails from "./components/SidePanelComponents/SidePanelDetails";
 import { motion } from "framer-motion";
 
 export default function SidePanel({
@@ -10,17 +10,28 @@ export default function SidePanel({
   speedKph,
 }) {
   const scaleVariants = {
-    hidden: { scale: .6, opacity: 0 },
-    visible: { scale: 1, opacity: 1, transition: {ease: [.39, 0, .15, .99], duration: 1}  }
+    hidden: { scale: 0.6, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { ease: [0.39, 0, 0.15, 0.99], duration: 1 },
+    },
   };
 
   return (
     <>
-      <div
-        className="flex flex-col items-center p-6 h-full side-bar w-[25.375rem] max-h-screen"
+      <motion.article
+        layout
+        className="flex flex-col items-center p-6 side-bar w-[27.375rem] h-screen shadow-[-5px_0_15px_0_hsla(215,19%,34%,1)]"
       >
-        <motion.div layout variants={scaleVariants} initial='hidden' animate='visible' className="flex flex-col gap-5 w-full">
-          <div className="flex justify-between items-center">
+        <motion.section
+          layout
+          variants={scaleVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-col gap-5 w-full"
+        >
+          <motion.section layout className="flex justify-between items-center">
             <h1 className="flex flex-col text-left">
               <p className="text-xl font-bold">
                 {!notLoadedCurrWeather ? weatherData.location.name : "--"}{" "}
@@ -38,9 +49,9 @@ export default function SidePanel({
             <h3 className="font-medium text-2xl">
               {!notLoadedCurrWeather ? time : "--"}
             </h3>
-          </div>
+          </motion.section>
 
-          <div className="flex flex-col">
+          <section className="flex flex-col">
             <div className="flex items-center gap-2 justify-center">
               {!notLoadedCurrWeather && (
                 <img
@@ -77,13 +88,21 @@ export default function SidePanel({
                   </p>
                 )}
               <p className="font-semibold">
-                {!notLoadedCurrWeather ? weatherData.current.condition.text : '---'}
+                {!notLoadedCurrWeather
+                  ? weatherData.current.condition.text
+                  : "---"}
               </p>
             </div>
-          </div>
-        </motion.div>
+          </section>
+        </motion.section>
 
-        <motion.div layout variants={scaleVariants} initial='hidden' animate='visible' className="divider" />
+        <motion.div
+          layout
+          variants={scaleVariants}
+          initial="hidden"
+          animate="visible"
+          className="divider"
+        />
 
         <SidePanelDetails
           weatherData={weatherData}
@@ -93,7 +112,7 @@ export default function SidePanel({
           notLoadedCurrWeather={notLoadedCurrWeather}
           scaleVariants={scaleVariants}
         />
-      </div>
+      </motion.article>
     </>
   );
 }
