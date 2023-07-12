@@ -1,6 +1,7 @@
 // import SidePanelSunRiseSunSet from "./SidePanelSunRiseSunSet";
 import SidePanelGroup from "./SidePanelGroup";
 import SidePanelWind from "./SidePanelWind";
+import { motion } from "framer-motion";
 
 export default function SidePanelDetails({
   weatherData,
@@ -8,9 +9,10 @@ export default function SidePanelDetails({
   tempC,
   precipMm,
   notLoadedCurrWeather,
+  scaleVariants
 }) {
   return (
-    <div className="flex flex-col items-center gap-3 w-full overflow-auto">
+    <motion.div layout variants={scaleVariants} initial='hidden' animate='visible' className="flex flex-col items-center gap-3 w-full overflow-auto">
       <SidePanelWind
         notLoadedCurrWeather={notLoadedCurrWeather}
         windKph={!notLoadedCurrWeather && weatherData.current.wind_kph}
@@ -37,6 +39,6 @@ export default function SidePanelDetails({
         date={date}
         currentAstronomy={currentAstronomy}
       /> */}
-    </div>
+    </motion.div>
   );
 }

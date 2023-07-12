@@ -1,4 +1,5 @@
 import SidePanelDetails from "./SidePanelDetails";
+import { motion } from "framer-motion";
 
 export default function SidePanel({
   weatherData,
@@ -8,10 +9,17 @@ export default function SidePanel({
   precipMm,
   speedKph,
 }) {
+  const scaleVariants = {
+    hidden: { scale: .6, opacity: 0 },
+    visible: { scale: 1, opacity: 1, transition: {ease: [.39, 0, .15, .99], duration: 1}  }
+  };
+
   return (
     <>
-      <div className="flex flex-col items-center p-6 fixed top-0 bottom-0 right-0 side-bar w-[25.375rem]">
-        <div className="flex flex-col gap-5 w-full">
+      <div
+        className="flex flex-col items-center p-6 h-full side-bar w-[25.375rem] max-h-screen"
+      >
+        <motion.div layout variants={scaleVariants} initial='hidden' animate='visible' className="flex flex-col gap-5 w-full">
           <div className="flex justify-between items-center">
             <h1 className="flex flex-col text-left">
               <p className="text-xl font-bold">
@@ -23,7 +31,9 @@ export default function SidePanel({
               </p>
             </h1>
 
-            {notLoadedCurrWeather && <span className="loading loading-ring loading-lg" />}
+            {notLoadedCurrWeather && (
+              <span className="loading loading-ring loading-lg" />
+            )}
 
             <h3 className="font-medium text-2xl">
               {!notLoadedCurrWeather ? time : "--"}
@@ -41,22 +51,39 @@ export default function SidePanel({
               )}
 
               <h3 className="font-semibold text-6xl">
-                {!notLoadedCurrWeather ? (tempC ? weatherData.current.temp_c + '°C' : weatherData.current.temp_f + '°F') : (tempC ? "--°C" : "--°F")}
+                {!notLoadedCurrWeather
+                  ? tempC
+                    ? weatherData.current.temp_c + "°C"
+                    : weatherData.current.temp_f + "°F"
+                  : tempC
+                  ? "--°C"
+                  : "--°F"}
               </h3>
             </div>
 
             <div className="flex flex-col">
-              { !notLoadedCurrWeather && (weatherData.current.feelslike_c !== weatherData.current.temp_c) && (
-                <p>Feels like {tempC && !notLoadedCurrWeather ? weatherData.current.feelslike_c + '°C' : !tempC && !notLoadedCurrWeather ? weatherData.current.feelslike_f + '°F' : tempC && notLoadedCurrWeather ? '--°C' : !tempC && notLoadedCurrWeather && '--°F'}</p>
-              )}
+              {!notLoadedCurrWeather &&
+                weatherData.current.feelslike_c !==
+                  weatherData.current.temp_c && (
+                  <p>
+                    Feels like{" "}
+                    {tempC && !notLoadedCurrWeather
+                      ? weatherData.current.feelslike_c + "°C"
+                      : !tempC && !notLoadedCurrWeather
+                      ? weatherData.current.feelslike_f + "°F"
+                      : tempC && notLoadedCurrWeather
+                      ? "--°C"
+                      : !tempC && notLoadedCurrWeather && "--°F"}
+                  </p>
+                )}
               <p className="font-semibold">
-                {!notLoadedCurrWeather && weatherData.current.condition.text}
+                {!notLoadedCurrWeather ? weatherData.current.condition.text : '---'}
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="divider" />
+        <motion.div layout variants={scaleVariants} initial='hidden' animate='visible' className="divider" />
 
         <SidePanelDetails
           weatherData={weatherData}
@@ -64,6 +91,7 @@ export default function SidePanel({
           tempC={tempC}
           precipMm={precipMm}
           notLoadedCurrWeather={notLoadedCurrWeather}
+          scaleVariants={scaleVariants}
         />
       </div>
     </>
