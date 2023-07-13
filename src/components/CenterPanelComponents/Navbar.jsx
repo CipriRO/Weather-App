@@ -1,19 +1,24 @@
 import { format } from "date-fns";
 
 export default function Navbar({date, notLoadedCurrWeather}) {
-  const formatDate = format(new Date(`${date} 18:00:00.000`), 'YYYY-MM-DD');
-  const currentDay = format(formatDate, 'PPP');
+  const dateVar = new Date(date);
+  const currentDay = format(dateVar, 'PPP');
+  const dayWeek = format(dateVar, 'EEEE');
 
   return (
     <nav className="absolute top-4 pl-3 left-4 right-4 rounded-2xl bg-[#A6ADBA1A] flex justify-between items-center">
-      <h1>{!notLoadedCurrWeather ? currentDay : '---'}</h1>
+      <div className="text-left flex flex-col">
+        <h1 className="text-lg font-bold">{!notLoadedCurrWeather ? currentDay : '---'}</h1>
+        <h3>{!notLoadedCurrWeather ? dayWeek : '---'}</h3>
+      </div>
+     
 
       <div className="join rounded-full shadow-lg">
         <input
           type="text"
           name="searchInput"
           className="input join-item font-semibold"
-          placeholder="Search Location Here.."
+          placeholder="Search Location Here..."
         />
         <button className="btn join-item">
           <svg
