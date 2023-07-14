@@ -5,6 +5,7 @@ export default function HourlyForecast({
   forecast,
   tempC,
   daySelected,
+  unavailableIcon
 }) {
   return (
     <section className="grid grid-flow-col gap-4 py-2 overflow-auto">
@@ -18,13 +19,15 @@ export default function HourlyForecast({
               {!notLoadedForecast ? format(new Date(hour.time), "HH") : "--"}
             </h1>
 
-            {!notLoadedForecast && (
-              <img
-                src={hour.condition.icon}
-                alt="weather icon"
-                className="w-14"
-              />
-            )}
+            <img
+              src={
+                !notLoadedForecast
+                  ? hour.condition.icon
+                  : unavailableIcon
+              }
+              alt="weather icon"
+              className="w-14"
+            />
 
             <p>
               {!notLoadedForecast

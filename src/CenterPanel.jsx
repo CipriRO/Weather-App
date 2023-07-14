@@ -12,6 +12,7 @@ export default function CenterPanel({
   // speedKph,
   // precipMm,
   tempC,
+  unavailableIcon
 }) {
   const dateVar = new Date(fullDate);
   const currentDay = format(dateVar, "PPP");
@@ -45,7 +46,7 @@ export default function CenterPanel({
           </h1>
           <div className="flex flex-col">
             <p>Take a look at today&apos;s hourly forecast below.</p>
-            <p>Select a time below to see more detailed information.</p>
+            <p><span className="font-semibold">Select</span> a time below to see more detailed information.</p>
           </div>
         </div>
 
@@ -55,6 +56,7 @@ export default function CenterPanel({
             tempC={tempC}
             forecast={!notLoadedForecast && forecast.forecast.forecastday}
             notLoadedForecast={notLoadedForecast}
+            unavailableIcon={unavailableIcon}
           />
 
           <p className="self-start">Select the desired day to view the weather data.</p>
@@ -66,6 +68,7 @@ export default function CenterPanel({
             tempC={tempC}
             forecast={!notLoadedForecast && forecast.forecast.forecastday}
             notLoadedForecast={notLoadedForecast}
+            unavailableIcon={unavailableIcon}
           />
         </div>
       </section>

@@ -8,6 +8,7 @@ export default function SidePanel({
   tempC,
   precipMm,
   speedKph,
+  unavailableIcon,
 }) {
   const scaleVariants = {
     hidden: { scale: 0.6, opacity: 0 },
@@ -54,13 +55,11 @@ export default function SidePanel({
           <section className="flex flex-col">
             <p>Real-time weather conditions</p>
             <div className="flex items-center gap-2 justify-center">
-              {!notLoadedCurrWeather && (
-                <img
-                  src={weatherData.current.condition.icon}
-                  alt="weather icon"
-                  className="w-20"
-                />
-              )}
+              <img
+                src={!notLoadedCurrWeather ? weatherData.current.condition.icon : unavailableIcon}
+                alt="weather icon"
+                className="w-20"
+              />
 
               <h3 className="font-semibold text-6xl">
                 {!notLoadedCurrWeather
@@ -74,20 +73,19 @@ export default function SidePanel({
             </div>
 
             <div className="flex flex-col">
-              {!notLoadedCurrWeather &&
+              {!notLoadedCurrWeather ? (
                 weatherData.current.feelslike_c !==
                   weatherData.current.temp_c && (
                   <p>
                     Feels like{" "}
-                    {tempC && !notLoadedCurrWeather
+                    {tempC
                       ? weatherData.current.feelslike_c + "°C"
-                      : !tempC && !notLoadedCurrWeather
-                      ? weatherData.current.feelslike_f + "°F"
-                      : tempC && notLoadedCurrWeather
-                      ? "--°C"
-                      : !tempC && notLoadedCurrWeather && "--°F"}
+                      : weatherData.current.feelslike_f + "°F"}
                   </p>
-                )}
+                )
+              ) : (
+                <p>---</p>
+              )}
               <p className="font-semibold">
                 {!notLoadedCurrWeather
                   ? weatherData.current.condition.text

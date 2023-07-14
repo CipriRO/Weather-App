@@ -7,6 +7,7 @@ export default function DailyForecast({
   days,
   daySelected,
   setDaySelected,
+  unavailableIcon
 }) {
   return (
     <section className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] gap-4">
@@ -32,13 +33,11 @@ export default function DailyForecast({
           <div className="divider m-0" />
 
           <div className="flex flex-wrap gap-2">
-            {!notLoadedForecast && (
               <img
-                src={day.day.condition.icon}
+                src={!notLoadedForecast ? day.day.condition.icon : unavailableIcon}
                 alt="weather icon"
                 className="w-16"
               />
-            )}
 
             <div className="flex flex-col gap-1 flex-1 items-center">
               <h2>{!notLoadedForecast ? day.day.condition.text : "---"}</h2>
