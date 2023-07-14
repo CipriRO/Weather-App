@@ -20,7 +20,7 @@ export default function SidePanelDetails({
       variants={scaleVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] grid-rows-[auto] grid-flow-dense gap-3 w-full overflow-auto"
+      className="grid grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] grid-rows-[auto] grid-flow-dense gap-3 w-full overflow-auto px-2"
     >
       <SidePanelWind
         notLoadedCurrWeather={notLoadedCurrWeather}
@@ -34,7 +34,7 @@ export default function SidePanelDetails({
       />
 
       <SidePanelHumidity
-        humidity={weatherData.current.humidity}
+        humidity={!notLoadedCurrWeather && weatherData.current.humidity}
         notLoadedCurrWeather={notLoadedCurrWeather}
       />
       <SidePanelPrecipitations
@@ -44,7 +44,7 @@ export default function SidePanelDetails({
         notLoadedCurrWeather={notLoadedCurrWeather}
       />
       <SidePanelUv
-        uv={weatherData.current.uv}
+        uv={!notLoadedCurrWeather && weatherData.current.uv}
         notLoadedCurrWeather={notLoadedCurrWeather}
       />
       <SidePanelVisibility

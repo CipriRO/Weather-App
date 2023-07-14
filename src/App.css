@@ -14,8 +14,29 @@
 }
 
 .side-bar {
-  background-color:hsla(215,19%,34%,1);
+  background-color:rgb(70, 84, 103);
 background-image:
-radial-gradient(at 100% 100%, hsla(214,73%,17%,1) 0px, transparent 50%),
-radial-gradient(at 12% 0%, hsla(209,10%,45%,1) 0px, transparent 50%);
+radial-gradient(at 100% 100%, rgb(12, 39, 75) 0px, transparent 50%),
+radial-gradient(at 12% 0%, rgb(103, 115, 126) 0px, transparent 50%);
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #A6ADBA1A transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #A6ADBA1A;
+  border-radius: 20px;
 }

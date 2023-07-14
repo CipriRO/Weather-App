@@ -29,7 +29,7 @@ export default function SidePanel({
           variants={scaleVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col gap-5 w-full"
+          className="flex flex-col gap-3 w-full"
         >
           <motion.section layout className="flex justify-between items-center">
             <h1 className="flex flex-col text-left">
@@ -52,6 +52,7 @@ export default function SidePanel({
           </motion.section>
 
           <section className="flex flex-col">
+            <p>Real-time weather conditions</p>
             <div className="flex items-center gap-2 justify-center">
               {!notLoadedCurrWeather && (
                 <img

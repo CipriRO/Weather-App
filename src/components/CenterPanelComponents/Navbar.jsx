@@ -1,15 +1,11 @@
-import { format } from "date-fns";
 
-export default function Navbar({date, notLoadedCurrWeather}) {
-  const dateVar = new Date(date);
-  const currentDay = format(dateVar, 'PPP');
-  const dayWeek = format(dateVar, 'EEEE');
+export default function Navbar({dayWeek, currentDay, notLoadedForecast}) {
 
   return (
-    <nav className="absolute top-4 pl-3 left-4 right-4 rounded-2xl bg-[#A6ADBA1A] flex justify-between items-center">
+    <nav className="mb-4 sticky top-4 pl-3 left-4 right-4 rounded-2xl bg-[#A6ADBA1A] flex justify-between items-center">
       <div className="text-left flex flex-col">
-        <h1 className="text-lg font-bold">{!notLoadedCurrWeather ? currentDay : '---'}</h1>
-        <h3>{!notLoadedCurrWeather ? dayWeek : '---'}</h3>
+        <h1 className="text-lg font-bold">{!notLoadedForecast ? currentDay : '---'}</h1>
+        <h3>{!notLoadedForecast ? dayWeek : '---'}</h3>
       </div>
      
 
