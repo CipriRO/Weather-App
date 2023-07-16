@@ -5,6 +5,7 @@ import CenterPanel from "./CenterPanel";
 import ForecastVariable from "./components/forecastVariable";
 
 function App() {
+  const apiKey = "c3cb9ca198f043e298794658230907";
   const [tempC, setTempC] = useState(true);
   const [speedKph, setSpeedKph] = useState(true);
   const [precipMm, setPrecipMm] = useState(true);
@@ -25,7 +26,6 @@ function App() {
   }, [forecast]);
 
   useEffect(() => {
-    const apiKey = "c3cb9ca198f043e298794658230907";
     const location = "Dumbraveni,Suceava";
 
     async function fetchcurrentForecast() {
@@ -57,6 +57,7 @@ function App() {
           fullDate={!notLoadedForecast && forecast.location.localtime}
           notLoadedForecast={notLoadedForecast}
           tempC={tempC}
+          apiKey={apiKey}
           speedKph={speedKph}
           precipMm={precipMm}
         />

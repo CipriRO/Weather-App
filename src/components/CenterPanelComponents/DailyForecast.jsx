@@ -7,17 +7,17 @@ export default function DailyForecast({
   days,
   daySelected,
   setDaySelected,
-  unavailableIcon
+  unavailableIcon,
 }) {
   return (
-    <section className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] gap-4">
+    <section className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] items-start gap-4">
       {(!notLoadedForecast ? forecast : [...Array(days)]).map((day, index) => (
         <div
           key={index}
           onClick={() => setDaySelected(index)}
-          className={`bg-[#A6ADBA1A] relative rounded-2xl flex flex-col p-2 flex-1 shadow-md cursor-pointer ${
+          className={`bg-[#A6ADBA1A] rounded-2xl flex flex-col p-2 flex-1 shadow-md cursor-pointer ${
             daySelected === index &&
-            "after:absolute after:-top-2 after:-left-2 after:-right-2 after:-bottom-2 after:pointer-events-none after:box-border after:border-2 after:border-[#bec6d41a] after:rounded-2xl"
+            "ring-2 ring-[#dce6f73f]"
           }`}
         >
           <h1 className="text-lg font-semibold">
@@ -32,12 +32,14 @@ export default function DailyForecast({
 
           <div className="divider m-0" />
 
-          <div className="flex flex-wrap gap-2">
-              <img
-                src={!notLoadedForecast ? day.day.condition.icon : unavailableIcon}
-                alt="weather icon"
-                className="w-16"
-              />
+          <div className="flex flex-wrap items-center justify-center">
+            <img
+              src={
+                !notLoadedForecast ? day.day.condition.icon : unavailableIcon
+              }
+              alt="weather icon"
+              className="w-16"
+            />
 
             <div className="flex flex-col gap-1 flex-1 items-center">
               <h2>{!notLoadedForecast ? day.day.condition.text : "---"}</h2>
@@ -64,6 +66,13 @@ export default function DailyForecast({
                   </span>
                 </p>
               </div>
+              <p>
+                {!notLoadedForecast
+                  ? day.day.daily_chance_of_snow > 0
+                    ? "Chance of snow: " + day.day.daily_chance_of_snow + "%"
+                    : "Chance of rain: " + day.day.daily_chance_of_rain + "%"
+                  : "---"}
+              </p>
             </div>
           </div>
         </div>
