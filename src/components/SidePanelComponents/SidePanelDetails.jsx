@@ -13,6 +13,7 @@ export default function SidePanelDetails({
   precipMm,
   notLoadedCurrWeather,
   scaleVariants,
+  fromBottomVariants
 }) {
   return (
     <motion.section
@@ -23,6 +24,7 @@ export default function SidePanelDetails({
       className="grid grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] grid-rows-[auto] grid-flow-dense gap-3 w-full overflow-auto px-2"
     >
       <SidePanelWind
+        fromBottomVariants={fromBottomVariants}
         notLoadedCurrWeather={notLoadedCurrWeather}
         windKph={!notLoadedCurrWeather && weatherData.current.wind_kph}
         windMph={!notLoadedCurrWeather && weatherData.current.wind_mph}
@@ -34,20 +36,24 @@ export default function SidePanelDetails({
       />
 
       <SidePanelHumidity
+        fromBottomVariants={fromBottomVariants}
         humidity={!notLoadedCurrWeather && weatherData.current.humidity}
         notLoadedCurrWeather={notLoadedCurrWeather}
       />
       <SidePanelPrecipitations
+        fromBottomVariants={fromBottomVariants}
         precipMm={precipMm}
         precipin={!notLoadedCurrWeather && weatherData.current.precip_in}
         precipmm={!notLoadedCurrWeather && weatherData.current.precip_mm}
         notLoadedCurrWeather={notLoadedCurrWeather}
       />
       <SidePanelUv
+        fromBottomVariants={fromBottomVariants}
         uv={!notLoadedCurrWeather && weatherData.current.uv}
         notLoadedCurrWeather={notLoadedCurrWeather}
       />
       <SidePanelVisibility
+        fromBottomVariants={fromBottomVariants}
         speedKph={speedKph}
         visibKm={!notLoadedCurrWeather && weatherData.current.vis_km}
         visibMl={!notLoadedCurrWeather && weatherData.current.vis_miles}

@@ -1,4 +1,5 @@
 import { isToday, isTomorrow, format } from "date-fns";
+import { motion } from "framer-motion";
 
 export default function DailyForecast({
   forecast,
@@ -8,16 +9,30 @@ export default function DailyForecast({
   daySelected,
   setDaySelected,
   unavailableIcon,
+  fromRightVariants,
 }) {
+  const childrenVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.25, delayChildren: 0.3 },
+    },
+  };
+
   return (
-    <section className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] items-start gap-4">
+    <motion.section
+      variants={childrenVariants}
+      initial="hidden"
+      animate="visible"
+      className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] items-start gap-4 overflow-hidden p-1"
+    >
       {(!notLoadedForecast ? forecast : [...Array(days)]).map((day, index) => (
-        <div
+        <motion.div
+          variants={fromRightVariants}
           key={index}
           onClick={() => setDaySelected(index)}
           className={`bg-[#A6ADBA1A] rounded-2xl flex flex-col p-2 flex-1 shadow-md cursor-pointer ${
-            daySelected === index &&
-            "ring-2 ring-[#dce6f73f]"
+            daySelected === index && "ring-2 ring-[#dce6f73f]"
           }`}
         >
           <h1 className="text-lg font-semibold">
@@ -75,8 +90,8 @@ export default function DailyForecast({
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </section>
+    </motion.section>
   );
 }

@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { motion } from "framer-motion";
 
 export default function HourlyForecast({
   notLoadedForecast,
@@ -6,12 +7,22 @@ export default function HourlyForecast({
   tempC,
   daySelected,
   unavailableIcon,
+  fromRightVariants
 }) {
+  const childrenVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+    },
+  };
+
   return (
-    <section className="grid grid-flow-col gap-4 py-2 overflow-auto">
+    <motion.section variants={childrenVariants} initial='hidden' animate='visible' className="grid grid-flow-col gap-4 py-2 overflow-auto">
       {(!notLoadedForecast ? forecast[daySelected].hour : [...Array(24)]).map(
         (hour, index) => (
-          <div
+          <motion.div
+            variants={fromRightVariants}
             key={index}
             className="bg-[#A6ADBA1A] rounded-2xl flex w-24 flex-col items-center p-2 flex-1 shadow-md cursor-pointer"
           >
@@ -32,9 +43,9 @@ export default function HourlyForecast({
                   : hour.temp_f + "°F"
                 : "--"}
             </p>
-          </div>
+          </motion.div>
         )
       )}
-    </section>
+    </motion.section>
   );
 }

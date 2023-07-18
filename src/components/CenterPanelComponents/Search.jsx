@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export default function Search({
   setInputValue,
   showLoadingSearch,
@@ -9,7 +11,7 @@ export default function Search({
   }
 
   return (
-    <div className="relative flex">
+    <motion.div layout className="relative flex">
       <div className="bg-[#1a1f25] px-3 flex items-center justify-center rounded-l-full">
         <svg
           width="26"
@@ -38,10 +40,10 @@ export default function Search({
         <div className="flex flex-col justify-center items-center absolute gap-2 bg-[#1a1f25] shadow-2xl top-14 left-1/2 -translate-x-1/2 rounded-2xl p-2 w-72 border-[#1b232a] border-4 z-10">
           {showLoadingSearch ? (
             <span className="loading loading-ring loading-lg" />
-          ) : searchResults ? (
+          ) : searchResults.length > 0 ? (
             searchResults.map((result, index) => (
               <button key={index} className="font-semibold hover:bg-[#232d36] w-full py-1 rounded-lg transition-colors">
-                {result.name}, {result.region}, {result.country}
+                {result.name}, {result.name !== result.region && result.region + ', '}{result.country}
               </button>
             ))
           ) : (
@@ -51,6 +53,6 @@ export default function Search({
           )}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

@@ -9,15 +9,9 @@ export default function SidePanel({
   precipMm,
   speedKph,
   unavailableIcon,
+  scaleVariants,
+  fromBottomVariants
 }) {
-  const scaleVariants = {
-    hidden: { scale: 0.6, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { ease: [0.39, 0, 0.15, 0.99], duration: 1 },
-    },
-  };
 
   return (
     <>
@@ -110,6 +104,7 @@ export default function SidePanel({
           precipMm={precipMm}
           notLoadedCurrWeather={notLoadedCurrWeather}
           scaleVariants={scaleVariants}
+          fromBottomVariants={fromBottomVariants}
         />
       </motion.article>
     </>

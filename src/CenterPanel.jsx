@@ -3,6 +3,7 @@ import DailyForecast from "./components/CenterPanelComponents/DailyForecast";
 import { format } from "date-fns";
 import { useEffect, useRef, useState } from "react";
 import HourlyForecast from "./components/CenterPanelComponents/HourlyForecast";
+import { motion } from "framer-motion";
 
 export default function CenterPanel({
   forecast,
@@ -13,7 +14,9 @@ export default function CenterPanel({
   // precipMm,
   tempC,
   apiKey,
+  fromRightVariants,
   unavailableIcon,
+  scaleVariants
 }) {
   const dateVar = new Date(fullDate);
   const currentDay = format(dateVar, "PPP");
@@ -56,7 +59,7 @@ export default function CenterPanel({
   }, [inputValue, apiKey]);
 
   return (
-    <article className="flex flex-col gap-4 flex-1 p-3 overflow-auto">
+    <motion.article variants={scaleVariants} initial='hidden' animate='visible' className="flex center-panel max-h-screen flex-col gap-4 flex-1 p-3 pr-1 overflow-auto">
       <Navbar
         currentDay={currentDay}
         dayWeek={dayWeek}
@@ -66,7 +69,7 @@ export default function CenterPanel({
         searchResults={searchResults}
       />
 
-      <section className="flex flex-col p-4 gap-3">
+      <section className="flex flex-col p-2 gap-3">
         <div className="flex flex-col text-left gap-2">
           <h1 className="text-3xl font-bold">
             {!notLoadedForecast ? "Good " + dayPeriod(true) : "---"}
@@ -87,6 +90,7 @@ export default function CenterPanel({
             forecast={!notLoadedForecast && forecast.forecast.forecastday}
             notLoadedForecast={notLoadedForecast}
             unavailableIcon={unavailableIcon}
+            fromRightVariants={fromRightVariants}
           />
 
           <p className="self-start">
@@ -98,12 +102,13 @@ export default function CenterPanel({
             setDaySelected={setDaySelected}
             days={days}
             tempC={tempC}
+            fromRightVariants={fromRightVariants}
             forecast={!notLoadedForecast && forecast.forecast.forecastday}
             notLoadedForecast={notLoadedForecast}
             unavailableIcon={unavailableIcon}
           />
         </div>
       </section>
-    </article>
+    </motion.article>
   );
 }

@@ -40,3 +40,23 @@ radial-gradient(at 12% 0%, rgb(103, 115, 126) 0px, transparent 50%);
   background-color: #A6ADBA1A;
   border-radius: 20px;
 }
+
+.center-panel {
+  scrollbar-width: thin;
+  scrollbar-color: #a6adba48 transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+.center-panel::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.center-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.center-panel::-webkit-scrollbar-thumb {
+  background-color: #a6adba48;
+  border-radius: 20px;
+}

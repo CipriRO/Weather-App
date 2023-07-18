@@ -1,4 +1,5 @@
 import windIcon from "../../assets/images/icons/WeatherIcon - wind.svg";
+import { motion } from "framer-motion";
 
 export default function SidePanelWind({
   windKph,
@@ -7,7 +8,8 @@ export default function SidePanelWind({
   gustMph,
   speedKph,
   windDir,
-  notLoadedCurrWeather
+  notLoadedCurrWeather,
+  fromBottomVariants
 }) {
   function getWindDirectionFullName(direction) {
     let fullName;
@@ -70,7 +72,7 @@ export default function SidePanelWind({
   }
 
   return (
-    <section className="bg-[#A6ADBA1A] col-span-1 row-span-2 min-[375px]:col-span-2 min-[375px]:row-span-1 flex flex-col gap-4 items-center p-4 rounded-2xl">
+    <motion.section variants={fromBottomVariants} className="bg-[#A6ADBA1A] col-span-1 row-span-2 min-[375px]:col-span-2 min-[375px]:row-span-1 flex flex-col gap-4 items-center p-4 rounded-2xl">
       <div className="flex gap-3 self-start">
         <img src={windIcon} alt="wind icon" className="w-8" />
         <h1 className="font-bold text-xl">Wind</h1>
@@ -95,6 +97,6 @@ export default function SidePanelWind({
           </span>
         </h2>
       </div>
-    </section>
+    </motion.section>
   );
 }

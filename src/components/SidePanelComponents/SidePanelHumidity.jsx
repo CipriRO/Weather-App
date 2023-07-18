@@ -1,8 +1,9 @@
 import humidIcon from '../../assets/images/icons/WeatherIcon - humidity.svg';
+import { motion } from 'framer-motion';
 
-export default function SidePanelHumidity({ humidity, notLoadedCurrWeather }) {
+export default function SidePanelHumidity({ humidity, notLoadedCurrWeather, fromBottomVariants }) {
   return (
-    <section className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
+    <motion.section variants={fromBottomVariants} className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
       <div className="flex gap-3 items-center self-start">
         <img src={humidIcon} alt="precipitations icon" className="w-6" />
         <h1 className="font-bold text-ellipsis overflow-hidden">Humidity</h1>
@@ -15,6 +16,6 @@ export default function SidePanelHumidity({ humidity, notLoadedCurrWeather }) {
         </h3>
         <p>{!notLoadedCurrWeather ? 'right now' : '---'}</p>
       </div>
-    </section>
+    </motion.section>
   );
 }
