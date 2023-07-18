@@ -3743,15 +3743,7 @@ export default function ForecastVariable({ setForecast }) {
       alert: [],
     },
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setForecast(forecast);
-    }, 1500);
-    
-    return () => clearTimeout(timeout);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  setForecast(forecast);
 
   return <></>;
 }

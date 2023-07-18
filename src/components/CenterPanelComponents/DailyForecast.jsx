@@ -1,5 +1,6 @@
 import { isToday, isTomorrow, format } from "date-fns";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 export default function DailyForecast({
   forecast,
@@ -10,6 +11,7 @@ export default function DailyForecast({
   setDaySelected,
   unavailableIcon,
   fromRightVariants,
+  setItsToday,
 }) {
   const childrenVariants = {
     hidden: { opacity: 0 },
@@ -18,6 +20,16 @@ export default function DailyForecast({
       transition: { staggerChildren: 0.25, delayChildren: 0.3 },
     },
   };
+
+  useEffect(() => {
+    if (!notLoadedForecast) {
+      isToday(new Date(forecast[daySelected].date))
+        ? setItsToday(true)
+        : setItsToday(false);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [daySelected, forecast, notLoadedForecast]);
 
   return (
     <motion.section
@@ -30,7 +42,9 @@ export default function DailyForecast({
         <motion.div
           variants={fromRightVariants}
           key={index}
-          onClick={() => setDaySelected(index)}
+          onClick={() => {
+            setDaySelected(index);
+          }}
           className={`bg-[#A6ADBA1A] rounded-2xl flex flex-col p-2 flex-1 shadow-md cursor-pointer ${
             daySelected === index && "ring-2 ring-[#dce6f73f]"
           }`}

@@ -16,7 +16,9 @@ export default function CenterPanel({
   apiKey,
   fromRightVariants,
   unavailableIcon,
-  scaleVariants
+  scaleVariants,
+  itsToday,
+  setItsToday
 }) {
   const dateVar = new Date(fullDate);
   const currentDay = format(dateVar, "PPP");
@@ -91,6 +93,8 @@ export default function CenterPanel({
             notLoadedForecast={notLoadedForecast}
             unavailableIcon={unavailableIcon}
             fromRightVariants={fromRightVariants}
+            itsToday={itsToday}
+            fullDate={fullDate}
           />
 
           <p className="self-start">
@@ -106,6 +110,7 @@ export default function CenterPanel({
             forecast={!notLoadedForecast && forecast.forecast.forecastday}
             notLoadedForecast={notLoadedForecast}
             unavailableIcon={unavailableIcon}
+            setItsToday={setItsToday}
           />
         </div>
       </section>

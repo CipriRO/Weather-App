@@ -10,6 +10,7 @@ function App() {
   const [speedKph, setSpeedKph] = useState(true);
   const [precipMm, setPrecipMm] = useState(true);
   const [forecast, setForecast] = useState();
+  const [itsToday, setItsToday] = useState(true);
   const [notLoadedForecast, setNotLoadedForecast] = useState(true);
   const scaleVariants = {
     hidden: { scale: 0.8, opacity: 0 },
@@ -51,7 +52,7 @@ function App() {
     if (forecast) {
       const timeout = setTimeout(() => {
         setNotLoadedForecast(false);
-      }, 500);
+      }, 1000);
 
       return () => clearTimeout(timeout);
     }
@@ -73,7 +74,7 @@ function App() {
       }
     }
 
-    // fetchcurrentForecast();
+    fetchcurrentForecast();
   }, []);
 
   !notLoadedForecast && console.log("Forecast: ", forecast);
@@ -81,7 +82,7 @@ function App() {
   return (
     <>
       <section className="w-full h-full flex gap-2 justify-between">
-        <ForecastVariable setForecast={setForecast} />
+        {/* <ForecastVariable setForecast={setForecast} /> */}
         <CenterPanel
           forecast={forecast}
           fromRightVariants={fromRightVariants}
@@ -94,6 +95,8 @@ function App() {
           speedKph={speedKph}
           precipMm={precipMm}
           scaleVariants={scaleVariants}
+          itsToday={itsToday}
+          setItsToday={setItsToday}
         />
 
         <SidePanel
