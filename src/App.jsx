@@ -77,8 +77,6 @@ function App() {
     fetchcurrentForecast();
   }, [location]);
 
-  !notLoadedForecast && console.log("Forecast: ", forecast);
-
   const [isLg, setIsLg] = useState(false);
 
   useEffect(() => {

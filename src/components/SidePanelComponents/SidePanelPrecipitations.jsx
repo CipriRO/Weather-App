@@ -9,9 +9,9 @@ export default function SidePanelPrecipitations({
   fromBottomVariants
 }) {
   return (
-    <motion.section variants={fromBottomVariants} className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
-      <div className="flex gap-3 items-center self-start">
-        <img src={precipIcon} alt="precipitations icon" className="w-4" />
+    <motion.section variants={fromBottomVariants} className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-3.5 rounded-2xl">
+      <div className="flex items-center self-start">
+        <img src={precipIcon} alt="precipitations icon" className="w-8" />
         <h1 className="font-bold text-ellipsis overflow-hidden">Precipitation</h1>
       </div>
 

@@ -69,7 +69,7 @@ export default function CenterPanel({
       variants={scaleVariants}
       initial="hidden"
       animate="visible"
-      className="flex center-panel max-h-screen flex-col gap-4 flex-1 p-3 pr-1 overflow-auto"
+      className="flex center-panel max-h-[100svh] flex-col gap-4 flex-1 p-3 lg:pr-1 overflow-auto"
     >
       <Navbar
         currentDay={currentDay}

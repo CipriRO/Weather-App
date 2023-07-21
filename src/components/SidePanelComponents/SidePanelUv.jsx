@@ -3,9 +3,9 @@ import { motion } from 'framer-motion'
 
 export default function SidePanelUv({uv, notLoadedCurrWeather, fromBottomVariants}) {
   return (
-    <motion.section variants={fromBottomVariants} className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-4 rounded-2xl">
-      <div className="flex gap-3 items-center self-start">
-        <img src={sun} alt="precipitations icon" className="w-6" />
+    <motion.section variants={fromBottomVariants} className="bg-[#A6ADBA1A] flex flex-col flex-1 gap-4 items-center p-3.5 rounded-2xl">
+      <div className="flex gap-2 items-center self-start">
+        <img src={sun} alt="precipitations icon" className="w-8" />
         <h1 className="font-bold">UV</h1>
       </div>
 

@@ -29,7 +29,7 @@ export default function SidePanel({
           }
         }
         exit={{ scale: 0.7, opacity: 0, borderRadius: "3rem", transition: { ease: [0.39, 0, 0.15, 0.99], duration: .7 } }}
-        className="flex lg:flex lg:static absolute left-0 right-0 flex-col items-center p-6 side-bar lg:w-[27.375rem] h-screen shadow-[-5px_0_15px_0_hsla(215,19%,34%,1)]"
+        className="flex lg:flex lg:static absolute left-0 right-0 flex-col items-center p-6 side-bar lg:w-[27.375rem] h-[100svh] shadow-[-5px_0_15px_0_hsla(215,19%,34%,1)]"
       >
         <motion.section
           layout
