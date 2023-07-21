@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 
-export default function ForecastVariable({ setForecast }) {
+export default function ForecastVariable({
+  setForecast,
+  setNotLoadedForecast,
+}) {
   const forecast = {
     location: {
       name: "Bucharest",
@@ -3743,7 +3746,18 @@ export default function ForecastVariable({ setForecast }) {
       alert: [],
     },
   };
-  setForecast(forecast);
+
+  useEffect(() => {
+    if (forecast) {
+      const timeout = setTimeout(() => {
+        setForecast(forecast);
+        setNotLoadedForecast(false);
+      }, 1000);
+
+      return () => clearTimeout(timeout);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <></>;
 }

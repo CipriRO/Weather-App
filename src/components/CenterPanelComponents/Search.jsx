@@ -1,14 +1,25 @@
 import { motion } from "framer-motion";
+import { useRef } from "react";
 
 export default function Search({
   setInputValue,
   showLoadingSearch,
   searchResults,
+  setLocation,
 }) {
+  const inputRef = useRef(null);
+
   function handleInputChange(event) {
     const { value } = event.target;
     setInputValue(value);
   }
+
+  function handleLocUpdate(result) {
+    inputRef.current.value = '';
+    setInputValue();
+    setLocation(result.lat + ',' + result.lon)
+  }
+  console.log(searchResults)
 
   return (
     <motion.div layout className="relative flex">
@@ -31,6 +42,7 @@ export default function Search({
 
       <input
         type="text"
+        ref={inputRef}
         onInput={handleInputChange}
         className="input rounded-l-none rounded-r-full font-semibold"
         placeholder="Search Location Here..."
@@ -42,7 +54,7 @@ export default function Search({
             <span className="loading loading-ring loading-lg" />
           ) : searchResults.length > 0 ? (
             searchResults.map((result, index) => (
-              <button key={index} className="font-semibold hover:bg-[#232d36] w-full py-1 rounded-lg transition-colors">
+              <button onClick={() => handleLocUpdate(result)} key={index} className="font-semibold hover:bg-[#232d36] w-full py-1 rounded-lg transition-colors">
                 {result.name}, {result.name !== result.region && result.region + ', '}{result.country}
               </button>
             ))

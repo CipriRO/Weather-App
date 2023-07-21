@@ -21,7 +21,7 @@ export default function SidePanelDetails({
       variants={scaleVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] grid-rows-[auto] grid-flow-dense gap-3 w-full overflow-auto px-2"
+      className="grid grid-cols-[repeat(auto-fill,_minmax(130px,_1fr))] items-start justify-center grid-rows-[auto] grid-flow-dense gap-3 w-full overflow-auto px-2"
     >
       <SidePanelWind
         fromBottomVariants={fromBottomVariants}

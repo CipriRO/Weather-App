@@ -18,7 +18,10 @@ export default function CenterPanel({
   unavailableIcon,
   scaleVariants,
   itsToday,
-  setItsToday
+  setItsToday,
+  setLocation,
+  showSidePanel,
+  setShowSidePanel,
 }) {
   const dateVar = new Date(fullDate);
   const currentDay = format(dateVar, "PPP");
@@ -61,7 +64,13 @@ export default function CenterPanel({
   }, [inputValue, apiKey]);
 
   return (
-    <motion.article variants={scaleVariants} initial='hidden' animate='visible' className="flex center-panel max-h-screen flex-col gap-4 flex-1 p-3 pr-1 overflow-auto">
+    <motion.article
+      layout
+      variants={scaleVariants}
+      initial="hidden"
+      animate="visible"
+      className="flex center-panel max-h-screen flex-col gap-4 flex-1 p-3 pr-1 overflow-auto"
+    >
       <Navbar
         currentDay={currentDay}
         dayWeek={dayWeek}
@@ -69,9 +78,10 @@ export default function CenterPanel({
         setInputValue={setInputValue}
         showLoadingSearch={showLoadingSearch}
         searchResults={searchResults}
+        setLocation={setLocation}
       />
 
-      <section className="flex flex-col p-2 gap-3">
+      <motion.section layout className="flex flex-col p-2 gap-3">
         <div className="flex flex-col text-left gap-2">
           <h1 className="text-3xl font-bold">
             {!notLoadedForecast ? "Good " + dayPeriod(true) : "---"}
@@ -95,9 +105,11 @@ export default function CenterPanel({
             fromRightVariants={fromRightVariants}
             itsToday={itsToday}
             fullDate={fullDate}
+            showSidePanel={showSidePanel}
+            setShowSidePanel={setShowSidePanel}
           />
 
-          <p className="self-start">
+          <p className="self-start text-left">
             Select the desired day to view the weather data.
           </p>
 
@@ -113,7 +125,7 @@ export default function CenterPanel({
             setItsToday={setItsToday}
           />
         </div>
-      </section>
+      </motion.section>
     </motion.article>
   );
 }

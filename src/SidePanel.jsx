@@ -10,14 +10,26 @@ export default function SidePanel({
   speedKph,
   unavailableIcon,
   scaleVariants,
-  fromBottomVariants
+  fromBottomVariants,
+  showSidePanel,
+  setShowSidePanel,
 }) {
-
   return (
     <>
       <motion.article
-        layout
-        className="flex flex-col items-center p-6 side-bar w-[27.375rem] h-screen shadow-[-5px_0_15px_0_hsla(215,19%,34%,1)]"
+        initial={
+          showSidePanel && { scale: 0.7, opacity: 0, borderRadius: "48px" }
+        }
+        animate={
+          showSidePanel && {
+            scale: 1,
+            opacity: 1,
+            borderRadius: '0px',
+            transition: { ease: [0.39, 0, 0.15, 0.99], duration: .7 },
+          }
+        }
+        exit={{ scale: 0.7, opacity: 0, borderRadius: "3rem", transition: { ease: [0.39, 0, 0.15, 0.99], duration: .7 } }}
+        className="flex lg:flex lg:static absolute left-0 right-0 flex-col items-center p-6 side-bar lg:w-[27.375rem] h-screen shadow-[-5px_0_15px_0_hsla(215,19%,34%,1)]"
       >
         <motion.section
           layout
@@ -41,6 +53,15 @@ export default function SidePanel({
               <span className="loading loading-ring loading-lg" />
             )}
 
+            {!notLoadedCurrWeather && (
+              <button
+                onClick={() => setShowSidePanel(false)}
+                className="btn bg-[#A6ADBA1A] border-none btn-sm rounded-full block lg:hidden"
+              >
+                Close
+              </button>
+            )}
+
             <h3 className="font-medium text-2xl">
               {!notLoadedCurrWeather ? time : "--"}
             </h3>
@@ -50,7 +71,11 @@ export default function SidePanel({
             <p>Real-time weather conditions</p>
             <div className="flex items-center gap-2 justify-center">
               <img
-                src={!notLoadedCurrWeather ? weatherData.current.condition.icon : unavailableIcon}
+                src={
+                  !notLoadedCurrWeather
+                    ? weatherData.current.condition.icon
+                    : unavailableIcon
+                }
                 alt="weather icon"
                 className="w-20"
               />

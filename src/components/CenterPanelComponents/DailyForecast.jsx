@@ -36,7 +36,7 @@ export default function DailyForecast({
       variants={childrenVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] items-start gap-4 overflow-hidden p-1"
+      className="grid grid-cols-[repeat(auto-fit,_minmax(150px,_1fr))] items-start gap-4 overflow-hidden p-1"
     >
       {(!notLoadedForecast ? forecast : [...Array(days)]).map((day, index) => (
         <motion.div
@@ -49,7 +49,7 @@ export default function DailyForecast({
             daySelected === index && "ring-2 ring-[#dce6f73f]"
           }`}
         >
-          <h1 className="text-lg font-semibold">
+          <h1 className="text-lg font-semibold flex-1 flex justify-center">
             {!notLoadedForecast
               ? isToday(new Date(day.date))
                 ? "Today"

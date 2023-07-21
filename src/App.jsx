@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import SidePanel from "./SidePanel";
 import CenterPanel from "./CenterPanel";
-import ForecastVariable from "./components/forecastVariable";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const apiKey = "c3cb9ca198f043e298794658230907";
@@ -10,8 +10,10 @@ function App() {
   const [speedKph, setSpeedKph] = useState(true);
   const [precipMm, setPrecipMm] = useState(true);
   const [forecast, setForecast] = useState();
-  const [itsToday, setItsToday] = useState(true);
+  const [showSidePanel, setShowSidePanel] = useState(false);
+  const [itsToday, setItsToday] = useState();
   const [notLoadedForecast, setNotLoadedForecast] = useState(true);
+  const [location, setLocation] = useState("auto:ip");
   const scaleVariants = {
     hidden: { scale: 0.8, opacity: 0 },
     visible: {
@@ -21,7 +23,7 @@ function App() {
         ease: [0.39, 0, 0.15, 0.99],
         duration: 1,
         staggerChildren: 0.25,
-        delayChildren: 0.3,
+        delayChildren: 0.2,
       },
     },
   };
@@ -59,8 +61,6 @@ function App() {
   }, [forecast]);
 
   useEffect(() => {
-    const location = "Dumbraveni,Suceava";
-
     async function fetchcurrentForecast() {
       try {
         const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=${days}&alerts=yes&aqi=no`;
@@ -75,14 +75,27 @@ function App() {
     }
 
     fetchcurrentForecast();
-  }, []);
+  }, [location]);
 
   !notLoadedForecast && console.log("Forecast: ", forecast);
+
+  const [isLg, setIsLg] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setIsLg(window.innerWidth >= 1024);
+    }
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <>
       <section className="w-full h-full flex gap-2 justify-between">
-        {/* <ForecastVariable setForecast={setForecast} /> */}
+        {/* <ForecastVariable setForecast={setForecast} setNotLoadedForecast={setNotLoadedForecast} /> */}
         <CenterPanel
           forecast={forecast}
           fromRightVariants={fromRightVariants}
@@ -97,19 +110,30 @@ function App() {
           scaleVariants={scaleVariants}
           itsToday={itsToday}
           setItsToday={setItsToday}
+          setLocation={setLocation}
+          showSidePanel={showSidePanel}
+          setShowSidePanel={setShowSidePanel}
         />
 
-        <SidePanel
-          scaleVariants={scaleVariants}
-          fromBottomVariants={fromBottomVariants}
-          weatherData={forecast}
-          unavailableIcon={unavailableIcon}
-          time={!notLoadedForecast && forecast.location.localtime.split(" ")[1]}
-          notLoadedCurrWeather={notLoadedForecast}
-          tempC={tempC}
-          speedKph={speedKph}
-          precipMm={precipMm}
-        />
+        <AnimatePresence>
+          {(isLg || showSidePanel) && (
+            <SidePanel
+              scaleVariants={scaleVariants}
+              fromBottomVariants={fromBottomVariants}
+              weatherData={forecast}
+              unavailableIcon={unavailableIcon}
+              time={
+                !notLoadedForecast && forecast.location.localtime.split(" ")[1]
+              }
+              notLoadedCurrWeather={notLoadedForecast}
+              tempC={tempC}
+              speedKph={speedKph}
+              precipMm={precipMm}
+              showSidePanel={showSidePanel}
+              setShowSidePanel={setShowSidePanel}
+            />
+          )}
+        </AnimatePresence>
       </section>
     </>
   );
