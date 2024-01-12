@@ -22,14 +22,6 @@ export default function Navbar({
           <h3>{!notLoadedForecast ? dayWeek : "---"}</h3>
         </div>
 
-        <Search
-          layout
-          setInputValue={setInputValue}
-          showLoadingSearch={showLoadingSearch}
-          searchResults={searchResults}
-          setLocation={setLocation}
-        />
-
       <a
         href="https://www.weatherapi.com/"
         title="Free Weather API"
